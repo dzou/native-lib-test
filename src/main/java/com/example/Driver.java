@@ -9,6 +9,8 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+import java.util.logging.StreamHandler;
 
 public class Driver {
 
@@ -19,18 +21,19 @@ public class Driver {
      * still dunno how to do that yet; this code below doesn't work.
      */
     Logger root = Logger.getLogger(OpenSsl.class.getCanonicalName());
-    root.setLevel(Level.FINEST);
+    root.setLevel(Level.ALL);
+    root.addHandler(new StreamHandler(System.out, new SimpleFormatter()));
+
     for (Handler handler : root.getHandlers()) {
-      handler.setLevel(Level.FINEST);
+      handler.setLevel(Level.ALL);
     }
 
-    System.out.println("Epoll.isAvailable(): " + Epoll.isAvailable());
-    System.out.println("OpenSsl.isAvailable(): " + OpenSsl.isAvailable());
+    root.info("Epoll.isAvailable(): " + Epoll.isAvailable());
+    root.info("OpenSsl.isAvailable(): " + OpenSsl.isAvailable());
 
     final SelfSignedCertificate ssc = new SelfSignedCertificate("blah.net");
     final SslContext sslCtx = SslContextBuilder.forServer(ssc.certificate(), ssc.privateKey()).build();
 
-    System.out.println("SSL Context is " + sslCtx + ", class is " + sslCtx.getClass());
+    root.info("SSL Context is " + sslCtx + ", class is " + sslCtx.getClass());
   }
-
 }
