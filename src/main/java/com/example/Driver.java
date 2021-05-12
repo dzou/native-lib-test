@@ -20,12 +20,12 @@ public class Driver {
      * Print all the debug output since there's some nice error messages here which
      * hint at what is going wrong.
      */
-    Logger root = Logger.getLogger(OpenSsl.class.getCanonicalName());
-    root.setLevel(Level.ALL);
+    Logger root = Logger.getLogger("");
+    root.setLevel(Level.FINEST);
     root.addHandler(new StreamHandler(System.out, new SimpleFormatter()));
 
     for (Handler handler : root.getHandlers()) {
-      handler.setLevel(Level.ALL);
+      handler.setLevel(Level.FINEST);
     }
 
     root.info("Epoll.isAvailable(): " + Epoll.isAvailable());
