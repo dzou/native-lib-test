@@ -17,8 +17,8 @@ public class Driver {
   public static void main(String[] args) throws Exception {
 
     /**
-     * The first step is we need to figure out how to enable debug logging...
-     * still dunno how to do that yet; this code below doesn't work.
+     * Print all the debug output since there's some nice error messages here which
+     * hint at what is going wrong.
      */
     Logger root = Logger.getLogger(OpenSsl.class.getCanonicalName());
     root.setLevel(Level.ALL);
